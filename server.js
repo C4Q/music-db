@@ -150,12 +150,16 @@ app.get('/api/playlists', (req, res) => {
   Playlist.findAll({
     include: [
       {
-      model: Song
-    },
-    {
-      model: Genre
-    },
-    
+      model: Song,
+      include: [
+        {
+        model: Artist
+      },
+      {
+        model: Genre
+      }
+    ]
+    }
   ]
   })
   .then((playlists) => {
