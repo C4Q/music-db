@@ -207,3 +207,46 @@ app.delete('/api/playlists/:id', (req, res) => {
     res.send('Playlist successfully deleted!')
   })
 })
+
+//GET all genres, ordered a-z
+app.get('/api/genres', (req, res) => {
+  Genre.findAll({
+    order: [
+      ['title', 'ASC']
+    ]
+  })
+  .then((genres) => {
+    res.send(genres)
+  })
+})
+
+//GET a specific genre by ID
+app.get('/api/genres/:id', (req, res) => {
+  var genreId = req.params.id;
+  Genre.findById(genreId)
+  .then((genre) => {
+    res.send(genre)
+  })
+})
+
+//POST (create) a new genre
+app.post('/api/genres', (req, res) => {
+  var newGenre = req.body.title
+  Genre.create({title: newGenre})
+  .then(() => {
+    res.send('A new genre has been created')
+  })
+})
+
+//PUT (update) a specific genre's name
+app.put('/api/genres/:id/:newGenre', (req, res) => {
+  var id = req.params.id;
+  var title = req.params.newGenre;
+  Genre.findById(id)
+  .then((genre) => {
+    genre.update({title: title})
+  })
+  .then(() => {
+    res.send('Genre has been successfully updated')
+  })
+})
