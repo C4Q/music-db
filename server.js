@@ -13,7 +13,6 @@ const Song = require('./models/song-model')
 
 //body-parser middleware adds .body property to req (if we make a POST AJAX request with some data attached, that data will be accessible as req.body)
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '/front/bundle')));
 
 //listen on port 9999
 app.listen('9999', () => console.log('Listening on port 9999'));
@@ -95,10 +94,6 @@ app.get('/api/songs', (req, res) => {
   })
 })
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/front/index.html'));
-});
-
 //GET specific song by id
 app.get('/api/songs/:id', (req, res) => {
   Song.findById(req.params.id, {
@@ -153,19 +148,15 @@ app.delete('/api/songs/:id', (req, res) => {
 //having the ids)
 app.get('/api/playlists', (req, res) => {
   Playlist.findAll({
-    include: [
-      {
+    include: [{
       model: Song,
-      include: [
-        {
+      include: [{
         model: Artist
       },
       {
         model: Genre
-      }
-    ]
-    }
-  ]
+      }]
+    }]
   })
   .then((playlists) => {
     res.send(playlists)
@@ -189,4 +180,30 @@ app.get('/api/playlists/:id',(req, res) => {
   })
 })
 
+//???????????????//
 //POST (create) a new playlist
+app.post('/api/playlists', (req, res) => {
+  var newPlaylist = req.body.list;
+  var title = req.body.title;
+  var url = req.body.url;
+  Playlist.create({title: newPlaylist})
+  .then((playlist) => {
+    playlist.addSongs({
+        title: title,
+        youtube_url: url
+    })
+  })
+  .then(() => {
+    res.send('Your playlist has been created!')
+  })
+})
+
+//DELETE a playlist by id
+app.delete('/api/playlists/:id', (req, res) => {
+  var playlistId = req.params.id;
+  Playlist.findById(playlistId)
+  .then((playlist) => {
+    playlist.destroy()
+    res.send('Playlist successfully deleted!')
+  })
+})
