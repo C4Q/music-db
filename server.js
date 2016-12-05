@@ -141,3 +141,43 @@ app.delete('/api/songs/:id', (req, res) => {
     res.send('The selected song has been deleted')
   })
 })
+
+//GET all playlists with song information fully populated
+//(in other words, should say full song,
+//artist, and genre names, instead of only
+//having the ids)
+app.get('/api/playlists', (req, res) => {
+  Playlist.findAll({
+    include: [
+      {
+      model: Song
+    },
+    {
+      model: Genre
+    },
+    
+  ]
+  })
+  .then((playlists) => {
+    res.send(playlists)
+  })
+})
+
+//GET a specific playlist by id
+app.get('/api/playlists/:id',(req, res) => {
+  var listId = req.params.id;
+  Playlist.findById(listId, {
+    include: [{
+      model: Song,
+      through: {
+        attributes: ['playlistId'],
+        where: {playlistId: listId}
+      }
+    }]
+  })
+  .then((playlist) => {
+    res.send(playlist)
+  })
+})
+
+//POST (create) a new playlist
