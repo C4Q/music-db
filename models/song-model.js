@@ -29,9 +29,12 @@ const Song = sequelizeConnection.define('song', {
 //the below method adds an artistId to the song table.
 Song.belongsTo(Artist)
 
-//With Song being the source and artist being the target,
-//the below method allows an instance of song to have multiple
-//genreIds
-Song.belongsToMany(Genre, {through: 'songGenre'})
-Genre.belongsToMany(Song, {through: 'songGenre'})
+///////////////////////////////////////////////////////////
+// When performing the belongsToMany method, methods to  //
+// leading in the direction(s) of the association should //
+// be listed in the same file.                           //
+///////////////////////////////////////////////////////////
+Genre.belongsToMany(Song, {through: 'songGenre', foreignKey: 'genreId'});
+Song.belongsToMany(Genre, {through: 'songGenre', foreignKey: 'songId'});
+
 module.exports = Song;

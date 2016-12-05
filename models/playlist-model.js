@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelizeConnection = require('../db');
+
 const Song = require('./song-model');
 
 //////////
@@ -14,8 +15,13 @@ const Playlist = sequelizeConnection.define('playlist', {
   }
 })
 
-Playlist.belongsToMany(Song, {through: 'playlistSong'})
-Song.belongsToMany(Playlist, {through: 'playistSong'})
+///////////////////////////////////////////////////////////
+// When performing the belongsToMany method, methods to  //
+// leading in the direction(s) of the association should //
+// be listed in the same file.                           //
+///////////////////////////////////////////////////////////
 
+Playlist.belongsToMany(Song, {through: 'playistSong', foreignKey: 'playlistId'});
+Song.belongsToMany(Playlist, {through: 'playistSong', foreignKey: 'songId'});
 
 module.exports = Playlist;
