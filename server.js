@@ -14,7 +14,7 @@ const Song = require('./models/song-model')
 //body-parser middleware adds .body property to req (if we make a POST AJAX request with some data attached, that data will be accessible as req.body)
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//listen on port 8888
+//listen on port 9999
 app.listen('9999', () => console.log('Listening on port 9999'));
 
 
@@ -91,5 +91,32 @@ app.get('/api/songs', (req, res) => {
   })
   .then((songs) => {
     res.send(songs)
+  })
+})
+
+//GET specific song by id
+app.get('/api/songs/:id', (req, res) => {
+  Song.findById(req.params.id, {
+    include: [{
+      model: Artist
+    }]
+  })
+  .then((song) => {
+    res.send(song)
+  })
+})
+
+//POST (create) a new song
+app.post('/api/songs', (req, res) => {
+  var newSong = req.body.title;
+  var youtubeLink = req.body.url;
+  var genreId = req.body.id
+  Song.create({
+    title: newSong,
+    youtube_url: youtubeLink
+  })
+  .then((song) => {
+    song.addGenre(genreId)
+    res.send('A new song was created!')
   })
 })
