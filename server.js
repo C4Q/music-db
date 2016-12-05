@@ -120,3 +120,24 @@ app.post('/api/songs', (req, res) => {
     res.send('A new song was created!')
   })
 })
+
+//PUT (update) a specific song's title
+app.put('/api/songs/:id/:newTitle', (req, res) => {
+  var songId = req.params.id;
+  var newTitle = req.params.newTitle;
+  Song.findById(songId)
+  .then((song) => {
+    song.update({title: newTitle})
+    res.send('The songs title has been updated')
+  })
+})
+
+//DELETE a specific song by id
+app.delete('/api/songs/:id', (req, res) => {
+  var songId = req.params.id;
+  Song.findById(songId)
+  .then((song) => {
+    song.destroy()
+    res.send('The selected song has been deleted')
+  })
+})
