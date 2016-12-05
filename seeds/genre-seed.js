@@ -9,6 +9,7 @@ Genre.sync({force: true})
   {title: 'hip hop'},
   {title: 'electronic'},
   {title: 'r & b'},
+  {title: 'soul'},
 ], {validate: true}))
 //the following genres should NOT be added to your database:
 //(if your validations are setup correctly)

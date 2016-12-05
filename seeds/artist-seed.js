@@ -9,6 +9,7 @@ Artist.sync({force: true})
   {name: 'Frank Ocean'},
   {name: 'Odesza'},
   {name: 'Nas'},
+  {name: 'Solange'},
 ]))
 //the following artists should NOT be added to your database:
 //(if your validations are setup correctly)

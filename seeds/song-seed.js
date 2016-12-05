@@ -27,6 +27,27 @@ Song.sync({force: true})
 .then((song) => {
   song.addGenres([1])
 })
+.then(() => Song.bulkCreate([
+  {title: 'Mad', youtube_url: 'https://www.youtube.com/watch?v=cjwHMuLdytY', artistId: 4},
+  {title: 'Rise', youtube_url: 'https://www.youtube.com/watch?v=KSZKs78Ixtk', artistId: 4},
+  {title: 'Weary', youtube_url: 'https://www.youtube.com/watch?v=KW7K0gzud5s', artistId: 4},
+  {title: 'Cranes in the Sky', youtube_url: 'https://www.youtube.com/watch?v=S0qrinhNnOM', artistId: 4},
+  {title: "Don't Wish Me Well", youtube_url: 'https://www.youtube.com/watch?v=N3gNFtRwWAU', artistId: 4}
+]))
+.then(()=> {
+  return Song.findAll({
+    where: {
+      artistId:[4]
+    }
+  }) 
+})
+.then(songs =>{
+  
+  //find all of the newly created arists and return the results
+  //(if we try to immediately return the artists after bulkCreate, the ids may all show up as 'null')
+  songs.map(song => song.addGenres([1,4]))
+  console.log(songs)
+})
 //the following artists should NOT be added to your database:
 //(if your validations are setup correctly)
 .then(() => Song.bulkCreate([
