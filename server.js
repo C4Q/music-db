@@ -15,7 +15,7 @@ const Song = require('./models/song-model')
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '/front/bundle')));
 
-//listen on port 8888
+//listen on port 9999
 app.listen('9999', () => console.log('Listening on port 9999'));
 
 
@@ -98,3 +98,51 @@ app.get('/api/songs', (req, res) => {
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '/front/index.html'));
 });
+
+//GET specific song by id
+app.get('/api/songs/:id', (req, res) => {
+  Song.findById(req.params.id, {
+    include: [{
+      model: Artist
+    }]
+  })
+  .then((song) => {
+    res.send(song)
+  })
+})
+
+//POST (create) a new song
+app.post('/api/songs', (req, res) => {
+  var newSong = req.body.title;
+  var youtubeLink = req.body.url;
+  var genreId = req.body.id
+  Song.create({
+    title: newSong,
+    youtube_url: youtubeLink
+  })
+  .then((song) => {
+    song.addGenre(genreId)
+    res.send('A new song was created!')
+  })
+})
+
+//PUT (update) a specific song's title
+app.put('/api/songs/:id/:newTitle', (req, res) => {
+  var songId = req.params.id;
+  var newTitle = req.params.newTitle;
+  Song.findById(songId)
+  .then((song) => {
+    song.update({title: newTitle})
+    res.send('The songs title has been updated')
+  })
+})
+
+//DELETE a specific song by id
+app.delete('/api/songs/:id', (req, res) => {
+  var songId = req.params.id;
+  Song.findById(songId)
+  .then((song) => {
+    song.destroy()
+    res.send('The selected song has been deleted')
+  })
+})
