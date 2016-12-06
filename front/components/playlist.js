@@ -1,9 +1,7 @@
 import React from 'react';
 import ListItem from './list-item';
-
+import Navigation from './navigation';
 const Playlist = (props) => {
-    console.log(props)
-
   const items = props.list.map((song,onSongSelect) => {
     return (
       <ListItem
@@ -14,7 +12,7 @@ const Playlist = (props) => {
   });
 
   return(
-    <ul className="col-md-4 list-group">
+    <ul className="col-md-3 list-group">
     {items}
     </ul>
   )
