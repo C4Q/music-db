@@ -27,6 +27,7 @@ Song.sync({force: true})
 .then((song) => {
   song.addGenres([1])
 })
+
 //the following artists should NOT be added to your database:
 //(if your validations are setup correctly)
 .then(() => Song.bulkCreate([
@@ -35,3 +36,4 @@ Song.sync({force: true})
 ], {validate: true}))
 // if everything is correct, you should only have THREE artists in your database
 .catch((err) => console.log(err));
+
