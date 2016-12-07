@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const LiveReloadPlugin = require('webpack-livereload-plugin');
 
 module.exports = {
-  entry: ["./front/App.jsx"],
+  entry: ["./front/index.jsx"],
   output: {
     path: __dirname + "/front/bundle",
     filename: "bundle.js",

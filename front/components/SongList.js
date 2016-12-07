@@ -1,12 +1,12 @@
 import React from 'react';
-import ListItem from './list-item';
+import SongListItem from './song-list-item';
 
-const Playlist = (props) => {
-    console.log(props)
+import Navigation from './navigation';
 
+const SongList = (props) => {
   const items = props.list.map((song,onSongSelect) => {
     return (
-      <ListItem
+      <SongListItem
         song={song}
         onSongSelect = {props.onSongSelect}
         key={song.id}  />
@@ -14,10 +14,10 @@ const Playlist = (props) => {
   });
 
   return(
-    <ul className="col-md-4 list-group">
+    <ul className="col-md-3 list-group">
     {items}
     </ul>
   )
 }
 
-export default Playlist;
+export default SongList;

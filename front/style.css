@@ -1,3 +1,16 @@
+#custom {
+  text-decoration: none;
+  display: -webkit-flex;
+   display: flex;
+   -webkit-flex-direction: row;
+   flex-direction: row;
+   -webkit-align-items: center;
+   align-items: center;
+   -webkit-justify-content: center;
+   justify-content: center;
+   color: blue;
+}
+
 .video-item img {
   max-width: 64px;
 }
@@ -18,7 +31,7 @@
 height: 100%;
 width: 100%;
 float: left;
-top: 0;
+top: 10;
 padding: none;
 
 
