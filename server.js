@@ -95,10 +95,6 @@ app.get('/api/songs', (req, res) => {
   })
 })
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/front/index.html'));
-});
-
 //GET specific song by id
 app.get('/api/songs/:id', (req, res) => {
   Song.findById(req.params.id, {
@@ -111,7 +107,7 @@ app.get('/api/songs/:id', (req, res) => {
   })
 })
 
-//POST (create) a new song
+// //POST (create) a new song
 app.post('/api/songs', (req, res) => {
   var newSong = req.body.title;
   var youtubeLink = req.body.url;
@@ -147,3 +143,121 @@ app.delete('/api/songs/:id', (req, res) => {
     res.send('The selected song has been deleted')
   })
 })
+
+//GET all playlists with song information fully populated
+//(in other words, should say full song,
+//artist, and genre names, instead of only
+//having the ids)
+app.get('/api/playlists', (req, res) => {
+  Playlist.findAll({
+    include: [{
+      model: Song,
+      include: [{
+        model: Artist
+      },
+      {
+        model: Genre
+      }]
+    }]
+  })
+  .then((playlists) => {
+    res.send(playlists)
+  })
+})
+
+//GET a specific playlist by id
+app.get('/api/playlists/:id',(req, res) => {
+  var listId = req.params.id;
+  Playlist.findById(listId, {
+    include: [{
+      model: Song,
+      through: {
+        attributes: ['playlistId'],
+        where: {playlistId: listId}
+      }
+    }]
+  })
+  .then((playlist) => {
+    res.send(playlist)
+  })
+})
+
+//???????????????//
+//POST (create) a new playlist
+app.post('/api/playlists', (req, res) => {
+  var newPlaylist = req.body.list;
+  var title = req.body.title;
+  var url = req.body.url;
+
+  //creates a new song using data entries from request
+  Song.create({
+    title: title,
+    youtube_url: url
+  })
+  Playlist.create({title: newPlaylist})
+  .then((playlist) => {
+    playlist[0].addSong({
+
+    })
+  })
+  .then(() => {
+    res.send('Your playlist has been created!')
+  })
+})
+
+//DELETE a playlist by id
+app.delete('/api/playlists/:id', (req, res) => {
+  var playlistId = req.params.id;
+  Playlist.findById(playlistId)
+  .then((playlist) => {
+    playlist.destroy()
+    res.send('Playlist successfully deleted!')
+  })
+})
+
+//GET all genres, ordered a-z
+app.get('/api/genres', (req, res) => {
+  Genre.findAll({
+    order: [
+      ['title', 'ASC']
+    ]
+  })
+  .then((genres) => {
+    res.send(genres)
+  })
+})
+
+//GET a specific genre by ID
+app.get('/api/genres/:id', (req, res) => {
+  var genreId = req.params.id;
+  Genre.findById(genreId)
+  .then((genre) => {
+    res.send(genre)
+  })
+})
+
+//POST (create) a new genre
+app.post('/api/genres', (req, res) => {
+  var newGenre = req.body.title
+  Genre.create({title: newGenre})
+  .then(() => {
+    res.send('A new genre has been created')
+  })
+})
+
+//PUT (update) a specific genre's name
+app.put('/api/genres/:id/:newGenre', (req, res) => {
+  var id = req.params.id;
+  var title = req.params.newGenre;
+  Genre.findById(id)
+  .then((genre) => {
+    genre.update({title: title})
+  })
+  .then(() => {
+    res.send('Genre has been successfully updated')
+  })
+})
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/front/index.html'));
+});

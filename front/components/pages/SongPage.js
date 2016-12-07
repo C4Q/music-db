@@ -51,13 +51,11 @@ export default class SongPage extends Component {
 
   videoSearch(term) {
     YTSearch( {key: API_KEY, term: term} , (videos) => {
-      this.setState(
-        {
+      this.setState({
           videos: videos,
           selectedVideo: videos[0]
-        } )
+        })
     });
-
   }
 
   filterSelect (filter) {
