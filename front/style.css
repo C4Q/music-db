@@ -1,3 +1,15 @@
+
+ul{
+  max-height: 400px !important;
+  overflow: scroll !important;
+}
+a{
+  text-decoration: none;
+}
+a:hover {
+  cursor: pointer;
+}
+
 #custom {
   text-decoration: none;
   display: -webkit-flex;

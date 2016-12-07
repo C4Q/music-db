@@ -3,11 +3,11 @@ import {Link} from 'react-router';
 
 const Navigation = () => {
   return(
-    <div className="col-md-1 list-group">
-      <div>Song</div>
-      <div>Artist</div>
-      <div>Playlist</div>
-    </div>
+    <ul className="col-md-1 list-group">
+      <Link to='/'><li className="list-group-item">Song</li></Link>
+      <Link to='artist'><li className="list-group-item">Artist</li></Link>
+      <Link to='playlist'><li className="list-group-item">Playlist</li></Link>
+    </ul>
   )
 
 }
