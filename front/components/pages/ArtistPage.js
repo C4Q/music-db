@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
 import YTSearch from 'youtube-api-search';
-import SongList from '../SongList.js';
+import ArtistList from '../ArtistList.js';
 import VideoDetail from '../video-detail';
 
 const API_KEY= "AIzaSyDXG0ix7GCK3i4l52t-XsY-_8pw3MBiL08";
 
-export default class SongPage extends Component {
+export default class ArtistPage extends Component {
   constructor (props) {
     super(props)
 
@@ -22,8 +22,9 @@ export default class SongPage extends Component {
       return (
           <div id="top">
             <VideoDetail video={this.state.selectedVideo}/>
-            <SongList list={this.state.list}
-              onSongSelect={this.handleSelect.bind(this)} />
+            <ArtistList list={this.state.list}
+              handleSelect={this.videoSearch.bind(this)}
+              />
           </div>
       )
     }
@@ -37,16 +38,11 @@ export default class SongPage extends Component {
   componentWillMount () {
     let that = this
     $.ajax({
-      url: "/api/songs",
+      url: "/api/artists",
       success: function (data) {
         that.setState({list: data})
       }
     })
-  }
-
-  handleSelect(video) {
-    // this.setState({selectedVideo: video})
-    this.videoSearch(video.title)
   }
 
   videoSearch(term) {
@@ -58,17 +54,6 @@ export default class SongPage extends Component {
         } )
     });
 
-  }
-
-  filterSelect (filter) {
-    let that = this
-    $.ajax({
-      url: "/api/"+ filter ,
-      success: function (data) {
-        // that.setState({list: data})
-        console.log(data)
-      }
-    })
   }
 
 }
