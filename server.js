@@ -107,7 +107,7 @@ app.get('/api/songs/:id', (req, res) => {
   })
 })
 
-//POST (create) a new song
+// //POST (create) a new song
 app.post('/api/songs', (req, res) => {
   var newSong = req.body.title;
   var youtubeLink = req.body.url;
@@ -187,11 +187,16 @@ app.post('/api/playlists', (req, res) => {
   var newPlaylist = req.body.list;
   var title = req.body.title;
   var url = req.body.url;
+
+  //creates a new song using data entries from request
+  Song.create({
+    title: title,
+    youtube_url: url
+  })
   Playlist.create({title: newPlaylist})
   .then((playlist) => {
-    playlist.addSongs({
-        title: title,
-        youtube_url: url
+    playlist[0].addSong({
+
     })
   })
   .then(() => {
