@@ -3,7 +3,13 @@ import SongListItem from './song-list-item';
 
 import Navigation from './navigation';
 
+const styles = {
+  "max-height": "450px",
+  "overflow": "scroll"
+}
+
 const SongList = (props) => {
+
   const items = props.list.map((song,onSongSelect) => {
     return (
       <SongListItem
@@ -14,9 +20,11 @@ const SongList = (props) => {
   });
 
   return(
-    <ul className="col-md-3 list-group">
-    {items}
-    </ul>
+    <div className="scroll col-md-3">
+      <ul style={styles}>
+      {items}
+      </ul>
+    </div>
   )
 }
 

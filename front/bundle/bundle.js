@@ -36735,22 +36735,34 @@
 	
 	var Navigation = function Navigation() {
 	  return _react2.default.createElement(
-	    'div',
+	    'ul',
 	    { className: 'col-md-1 list-group' },
 	    _react2.default.createElement(
-	      'div',
-	      null,
-	      'Song'
+	      _reactRouter.Link,
+	      { to: '/' },
+	      _react2.default.createElement(
+	        'li',
+	        { className: 'list-group-item' },
+	        'Song'
+	      )
 	    ),
 	    _react2.default.createElement(
-	      'div',
-	      null,
-	      'Artist'
+	      _reactRouter.Link,
+	      { to: 'artist' },
+	      _react2.default.createElement(
+	        'li',
+	        { className: 'list-group-item' },
+	        'Artist'
+	      )
 	    ),
 	    _react2.default.createElement(
-	      'div',
-	      null,
-	      'Playlist'
+	      _reactRouter.Link,
+	      { to: 'playlist' },
+	      _react2.default.createElement(
+	        'li',
+	        { className: 'list-group-item' },
+	        'Playlist'
+	      )
 	    )
 	  );
 	};
@@ -37850,7 +37862,13 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var styles = {
+	  "max-height": "450px",
+	  "overflow": "scroll"
+	};
+	
 	var SongList = function SongList(props) {
+	
 	  var items = props.list.map(function (song, onSongSelect) {
 	    return _react2.default.createElement(_songListItem2.default, {
 	      song: song,
@@ -37859,9 +37877,13 @@
 	  });
 	
 	  return _react2.default.createElement(
-	    'ul',
-	    { className: 'col-md-3 list-group' },
-	    items
+	    'div',
+	    { className: 'scroll col-md-3' },
+	    _react2.default.createElement(
+	      'ul',
+	      { style: styles },
+	      items
+	    )
 	  );
 	};
 	
@@ -38108,6 +38130,11 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var styles = {
+	  "max-height": "450px",
+	  "overflow": "scroll"
+	};
+	
 	var ArtistList = function ArtistList(props) {
 	  var items = props.list.map(function (data) {
 	    return _react2.default.createElement(_artistListItem2.default, {
@@ -38117,9 +38144,13 @@
 	  });
 	
 	  return _react2.default.createElement(
-	    'ul',
-	    { className: 'col-md-3 list-group' },
-	    items
+	    'div',
+	    { className: 'scroll col-md-3' },
+	    _react2.default.createElement(
+	      'ul',
+	      { style: styles },
+	      items
+	    )
 	  );
 	};
 	
