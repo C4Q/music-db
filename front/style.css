@@ -1,0 +1,56 @@
+
+ul{
+  max-height: 400px !important;
+  overflow: scroll !important;
+}
+a{
+  text-decoration: none;
+}
+a:hover {
+  cursor: pointer;
+}
+
+#custom {
+  text-decoration: none;
+  display: -webkit-flex;
+   display: flex;
+   -webkit-flex-direction: row;
+   flex-direction: row;
+   -webkit-align-items: center;
+   align-items: center;
+   -webkit-justify-content: center;
+   justify-content: center;
+   color: blue;
+}
+
+.video-item img {
+  max-width: 64px;
+}
+
+.video-detail details {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px dashed #ddd;
+}
+
+.list-group-item:hover {
+  cursor: pointer;
+  background-color: #eee;
+}
+
+#background-video{
+
+height: 100%;
+width: 100%;
+float: left;
+top: 10;
+padding: none;
+
+
+}
+
+#top {
+  z-index:1;
+  position: absolute;
+  margin: 0 auto;
+}
