@@ -12,7 +12,7 @@ Genre.sync({force: true})
 ], {validate: true}))
 //the following genres should NOT be added to your database:
 //(if your validations are setup correctly)
-.then(() => Genre.create({title: ''}))
-.then(() => Genre.create({title: ['genre1', 'genre2']}))
-// if everything is correct, you should only have THREE genres in your database
+// .then(() => Genre.create({title: ''}))
+// .then(() => Genre.create({title: ['genre1', 'genre2']}))
+// // if everything is correct, you should only have THREE genres in your database
 .catch((err) => console.log(err));

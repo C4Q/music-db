@@ -1,0 +1,123 @@
+html, body {
+  margin: 0;
+}
+
+.pageTitles {
+  font-weight: 300;
+  font-size: 4.5rem;
+}
+
+/*--------Navbar-------*/
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.navLinks a {
+  text-decoration: none;
+  color: black;
+}
+
+.brand {
+  font-size: 1.8rem;
+  margin: 0;
+  font-weight: 300;
+}
+
+.brand span {
+  font-weight: 700;
+}
+
+ul {
+  width: 300px;
+  /*background-color: blue;*/
+  display: flex;
+  justify-content: space-between;
+  /*align-items: center;*/
+}
+
+li {
+  list-style: none;
+}
+
+/*--------/Navbar-------*/
+
+
+
+/*--------Artist-------*/
+.mainContainer {
+  /*height: 900px;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*background-color: blue;*/
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.artistContainer {
+  width: 500px;
+  height: 600px;
+  /*background-color: orange;*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 300;
+}
+
+.listUl {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 0;
+}
+
+.listLi {
+  font-size: 2em;
+  margin-bottom: 20px;
+
+}
+
+.list {
+  font-weight: 300;
+  font-size: 2em;
+}
+
+i {
+  font-size: .5em;
+}
+
+/*--------/Artist-------*/
+
+
+
+/*--------Song-------*/
+.songContainer {
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.individualSong {
+  margin-top: 30px;
+  width: 600px;
+  height: 470px;
+  /*background-color: yellow;*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #efefef;
+  border-radius: 5px;
+}
+
+.songName {
+  font-weight: 300;
+}
+
+.songArtist {
+  font-weight: 300;
+  margin-top: 0;
+}
+/*--------/Song-------*/

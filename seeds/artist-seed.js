@@ -9,12 +9,15 @@ Artist.sync({force: true})
   {name: 'Frank Ocean'},
   {name: 'Odesza'},
   {name: 'Nas'},
-]))
-//the following artists should NOT be added to your database:
-//(if your validations are setup correctly)
-.then(() => Artist.bulkCreate([
-  {name: ''},
-  {name: ['artist1', 'artist2']},
-], {validate: true}))
-// if everything is correct, you should only have THREE artists in your database
-.catch((err) => console.log(err));
+  {name: 'Earl Sweatshirt'}
+]));
+
+
+// //the following artists should NOT be added to your database:
+// //(if your validations are setup correctly)
+// .then(() => Artist.bulkCreate([
+//   {name: ''},
+//   {name: ['artist1', 'artist2']},
+// ], {validate: true}))
+// // if everything is correct, you should only have THREE artists in your database
+// .catch((err) => console.log(err));

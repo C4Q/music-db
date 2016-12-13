@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 const sequelizeConnection = require('../db');
 
-const Genre = sequelizeConnection.define('genre', {
-	title: {
+const Producer = sequelizeConnection.define('producer', {
+	name: {
 		type: Sequelize.STRING,
 		validate: {
 			len: [1, 100]
@@ -10,4 +10,4 @@ const Genre = sequelizeConnection.define('genre', {
 	}
 })
 
-module.exports = Genre;
+module.exports = Producer;
